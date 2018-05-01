@@ -2,13 +2,19 @@
     "builders":[{
         "type": "docker",
         "image": "ubuntu",
-        "export_path": "image.tar"
+        "export_path": "image.tar",
+        "changes": [
+        ]
     }],
     "provisioners":[
         {
             "type": "shell",
-            "inline": ["apt-get -y update; apt-get install -y curl"]
-        },
+            "inline": [
+                        "export TERM=linux",
+                        "export DEBIAN_FRONTEND=noninteractive",
+                        "apt-get -y update; apt-get install -y sudo curl"
+                      ]
+                    },
         {
             "type": "chef-solo",
             "cookbook_paths": ["site-cookbooks"],
